@@ -1,4 +1,5 @@
 from car.models import Car
+from car.serializers import CarSerializer
 
 
 def serialize_car_object(car: Car) -> bytes:
@@ -7,6 +8,6 @@ def serialize_car_object(car: Car) -> bytes:
 
 
 def deserialize_car_object(json: bytes) -> Car:
-    serializer = CarSerializer(data=data)
+    serializer = CarSerializer(data=json)
     serializer.is_valid(raise_exception=True)
     return serializer.save()
