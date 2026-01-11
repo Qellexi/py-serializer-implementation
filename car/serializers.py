@@ -3,14 +3,20 @@ from car.models import Car
 
 
 class CarSerializer(serializers.Serializer):
+    id = serializers.IntegerField(read_only=True)
+
     manufacturer = serializers.CharField(max_length=64)
     model = serializers.CharField(max_length=64)
-    horse_power = serializers.IntegerField(source="horse_powers")
+    horse_power = serializers.IntegerField(
+        source="horse_powers",
+        validators=[MinValueValidator(1), MaxValueValidator(1914)],
+    )
+
     is_broken = serializers.BooleanField()
+
     problem_description = serializers.CharField(
         required=False,
         allow_null=True,
-        allow_blank=True,
     )
 
     def create(self, validated_data):
