@@ -8,8 +8,7 @@ class CarSerializer(serializers.Serializer):
 
     manufacturer = serializers.CharField(max_length=64)
     model = serializers.CharField(max_length=64)
-    horse_power = serializers.IntegerField(
-        source="horse_powers",
+    horse_powers = serializers.IntegerField(
         validators=[MinValueValidator(1), MaxValueValidator(1914)],
     )
 
